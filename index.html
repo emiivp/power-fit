@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PowerFit | Sistema de Administración</title>
+
+    <link rel="stylesheet" href="estilos.css">
+</head>
+
+<body>
+
+    <!-- ---------- ENCABEZADO ---------- -->
+
+    <header>
+
+        <div class="logo-container">
+
+            <img src="imagenes/1logo.png" alt="Logo PowerFit">
+
+            <span>PowerFit</span>
+
+        </div>
+
+        <nav>
+
+            <a href="#inicio">Inicio</a>
+            <a href="#clientes">Clientes</a>
+            <a href="#membresias">Membresías</a>
+            <a href="#pagos">Pagos</a>
+            <a href="#rutinas">Rutinas</a>
+            <a href="#documentos">Documentos</a>
+            <a href="#estadisticas">Estadísticas</a>
+            <a href="arquitectura.html">Arquitectura</a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ---------- INICIO ---------- -->
+
+    <section id="inicio" class="hero">
+
+        <img
+            src="imagenes/1logo.png"
+            alt="PowerFit"
+            class="hero-logo"
+        >
+
+        <p>
+            Sistema de administración para gimnasio
+        </p>
+
+        <div class="user-access">
+
+            <h2>Bienvenido</h2>
+
+            <p>
+                Ingresa tu nombre o nickname para comenzar.
+            </p>
+
+            <input
+                type="text"
+                id="usuario"
+                placeholder="Nombre o nickname"
+            >
+
+            <button
+                class="btn"
+                onclick="iniciarSistema()"
+            >
+                COMENZAR
+            </button>
+
+            <div id="mensajeBienvenida"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- CARGA DEL SISTEMA ---------- -->
+
+    <section class="section loading-section">
+
+        <div
+            id="cargaSistema"
+            class="loading-box"
+        >
+
+            <span id="textoCarga">
+                Sistema listo para iniciar.
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- MENÚ PRINCIPAL ---------- -->
+
+    <section class="section" id="menu">
+
+        <div class="section-title">
+
+            <h2>Menú principal</h2>
+
+            <p>
+                Módulos disponibles dentro de PowerFit.
+            </p>
+
+        </div>
+
+
+        <div class="menu-table-container">
+
+            <table class="menu-table">
+
+                <thead>
+
+                    <tr>
+                        <th>Opción</th>
+                        <th>Función</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+                        <td>Clientes</td>
+                        <td>Registrar, buscar, consultar y administrar clientes.</td>
+                    </tr>
+
+                    <tr>
+                        <td>Membresías</td>
+                        <td>Consultar tipos y precios de membresía.</td>
+                    </tr>
+
+                    <tr>
+                        <td>Pagos</td>
+                        <td>Registrar el pago de los clientes.</td>
+                    </tr>
+
+                    <tr>
+                        <td>Rutinas</td>
+                        <td>Generar rutinas de acuerdo con el objetivo.</td>
+                    </tr>
+
+                    <tr>
+                        <td>Documentos</td>
+                        <td>Crear, consultar y modificar registros del sistema.</td>
+                    </tr>
+
+                    <tr>
+                        <td>Estadísticas</td>
+                        <td>Consultar información general de los clientes.</td>
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- PRESENTACIÓN ---------- -->
+
+    <section class="section">
+
+        <div class="two-columns">
+
+            <div>
+
+                <h2>¿Qué es PowerFit?</h2>
+
+                <p>
+                    PowerFit es una aplicación de administración para
+                    <strong>Iron Core Fitness Center</strong>, diseñada
+                    para facilitar la organización de la información
+                    de los clientes.
+                </p>
+
+                <p>
+                    El sistema permite registrar clientes, consultar
+                    información, administrar membresías, registrar
+                    pagos, generar rutinas y consultar estadísticas.
+                </p>
+
+                <p>
+                    La aplicación web funciona como una representación
+                    visual e interactiva de las funciones principales
+                    desarrolladas originalmente en Python.
+                </p>
+
+            </div>
+
+            <img
+                src="imagenes/3powerfit.jpg"
+                alt="PowerFit"
+                class="section-image"
+            >
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- VIDEO ---------- -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>Presentación del sistema</h2>
+
+            <p>
+                Demostración de las funciones principales de PowerFit.
+            </p>
+
+        </div>
+
+        <div class="video-container">
+
+            <video controls>
+
+                <source
+                    src="video/powerfit.mp4"
+                    type="video/mp4"
+                >
+
+                Tu navegador no soporta la reproducción de video.
+
+            </video>
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- CLIENTES ---------- -->
+
+    <section class="section" id="clientes">
+
+        <div class="section-title">
+
+            <h2>Clientes</h2>
+
+            <p>
+                Administración de los registros de los clientes.
+            </p>
+
+        </div>
+
+
+        <!-- Registrar -->
+
+        <div class="panel">
+
+            <h3>Registrar cliente</h3>
+
+            <form id="clienteForm">
+
+                <div class="form-grid">
+
+                    <div>
+
+                        <label>ID del cliente</label>
+
+                        <input
+                            type="text"
+                            id="clienteId"
+                            placeholder="Ej. PF001"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>Nombre</label>
+
+                        <input
+                            type="text"
+                            id="clienteNombre"
+                            placeholder="Nombre completo"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>Edad</label>
+
+                        <input
+                            type="number"
+                            id="clienteEdad"
+                            placeholder="Edad"
+                            min="1"
+                            max="100"
+                        >
+
+                    </div>
+
+
+                    <div>
+
+                        <label>Membresía</label>
+
+                        <select id="clienteMembresia">
+
+                            <option value="">
+                                Seleccionar
+                            </option>
+
+                            <option value="Mensual">
+                                Mensual
+                            </option>
+
+                            <option value="Trimestral">
+                                Trimestral
+                            </option>
+
+                            <option value="Anual">
+                                Anual
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>Objetivo</label>
+
+                        <select id="clienteObjetivo">
+
+                            <option value="">
+                                Seleccionar
+                            </option>
+
+                            <option value="Ganar masa muscular">
+                                Ganar masa muscular
+                            </option>
+
+                            <option value="Pérdida de grasa">
+                                Pérdida de grasa
+                            </option>
+
+                            <option value="Mejorar condición física">
+                                Mejorar condición física
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div>
+
+                        <label>Fecha de registro</label>
+
+                        <input
+                            type="date"
+                            id="fechaRegistro"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="btn"
+                >
+                    Registrar cliente
+                </button>
+
+            </form>
+
+
+            <div id="mensajeCliente"></div>
+
+        </div>
+
+
+        <!-- Buscar -->
+
+        <div class="panel">
+
+            <h3>Buscar cliente</h3>
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="buscarId"
+                    placeholder="Ingresa el ID"
+                >
+
+                <button
+                    class="btn"
+                    onclick="buscarCliente()"
+                >
+                    Buscar
+                </button>
+
+            </div>
+
+            <div id="resultadoBusqueda"></div>
+
+        </div>
+
+
+        <!-- Lista -->
+
+        <div class="panel">
+
+            <div class="panel-header">
+
+                <h3>Clientes registrados</h3>
+
+                <span id="totalClientes">
+                    0 clientes
+                </span>
+
+            </div>
+
+            <div id="listaClientes"></div>
+
+        </div>
+
+
+        <!-- Información -->
+
+        <div class="panel">
+
+            <h3>Información completa</h3>
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="infoId"
+                    placeholder="ID del cliente"
+                >
+
+                <button
+                    class="btn"
+                    onclick="mostrarInformacion()"
+                >
+                    Consultar
+                </button>
+
+            </div>
+
+            <div id="informacionCliente"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- MEMBRESÍAS ---------- -->
+
+    <section class="section" id="membresias">
+
+        <div class="section-title">
+
+            <h2>Membresías</h2>
+
+            <p>
+                Tipos de membresía disponibles.
+            </p>
+
+        </div>
+
+
+        <div class="cards">
+
+            <div class="card">
+
+                <h3>Mensual</h3>
+
+                <div class="price">
+                    $500
+                </div>
+
+                <p>
+                    Acceso durante un mes.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Trimestral</h3>
+
+                <div class="price">
+                    $1,300
+                </div>
+
+                <p>
+                    Acceso durante tres meses.
+                </p>
+
+            </div>
+
+
+            <div class="card">
+
+                <h3>Anual</h3>
+
+                <div class="price">
+                    $4,500
+                </div>
+
+                <p>
+                    Acceso durante un año.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- PAGOS ---------- -->
+
+    <section class="section" id="pagos">
+
+        <div class="section-title">
+
+            <h2>Pagos</h2>
+
+            <p>
+                Registro de pagos de los clientes.
+            </p>
+
+        </div>
+
+
+        <div class="panel">
+
+            <h3>Registrar pago</h3>
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="pagoId"
+                    placeholder="ID del cliente"
+                >
+
+                <button
+                    class="btn"
+                    onclick="registrarPago()"
+                >
+                    Registrar pago
+                </button>
+
+            </div>
+
+            <div id="resultadoPago"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- ADMINISTRACIÓN ---------- -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>Administración</h2>
+
+            <p>
+                Modificación y eliminación de registros.
+            </p>
+
+        </div>
+
+
+        <div class="admin-grid">
+
+
+            <!-- Editar -->
+
+            <div class="panel">
+
+                <h3>Modificar cliente</h3>
+
+                <form id="editarForm">
+
+                    <label>ID del cliente</label>
+
+                    <input
+                        type="text"
+                        id="editarId"
+                        placeholder="ID"
+                    >
+
+
+                    <label>Nuevo nombre</label>
+
+                    <input
+                        type="text"
+                        id="nuevoNombre"
+                        placeholder="Nuevo nombre"
+                    >
+
+
+                    <label>Nueva edad</label>
+
+                    <input
+                        type="number"
+                        id="nuevaEdad"
+                        min="1"
+                        max="100"
+                        placeholder="Nueva edad"
+                    >
+
+
+                    <button
+                        type="submit"
+                        class="btn"
+                    >
+                        Modificar
+                    </button>
+
+                </form>
+
+                <div id="mensajeEditar"></div>
+
+            </div>
+
+
+            <!-- Eliminar -->
+
+            <div class="panel">
+
+                <h3>Eliminar cliente</h3>
+
+                <label>ID del cliente</label>
+
+                <input
+                    type="text"
+                    id="eliminarId"
+                    placeholder="ID"
+                >
+
+                <button
+                    class="btn btn-danger"
+                    onclick="eliminarCliente()"
+                >
+                    Eliminar
+                </button>
+
+                <div id="mensajeEliminar"></div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- DOCUMENTOS ---------- -->
+
+    <section class="section" id="documentos">
+
+        <div class="section-title">
+
+            <h2>Documentos del sistema</h2>
+
+            <p>
+                Administración de registros y documentos utilizados
+                por PowerFit.
+            </p>
+
+        </div>
+
+
+        <div class="panel">
+
+            <h3>Seleccionar documento</h3>
+
+            <div class="search-box">
+
+                <select id="documentoSeleccionado">
+
+                    <option value="clientes.txt">
+                        clientes.txt
+                    </option>
+
+                    <option value="membresias.txt">
+                        membresias.txt
+                    </option>
+
+                    <option value="pagos.txt">
+                        pagos.txt
+                    </option>
+
+                    <option value="rutinas.txt">
+                        rutinas.txt
+                    </option>
+
+                </select>
+
+                <button
+                    class="btn"
+                    onclick="leerDocumento()"
+                >
+                    Leer documento
+                </button>
+
+            </div>
+
+
+            <div id="contenidoDocumento"></div>
+
+        </div>
+
+
+        <div class="admin-grid">
+
+
+            <!-- Crear -->
+
+            <div class="panel">
+
+                <h3>Crear documento</h3>
+
+                <input
+                    type="text"
+                    id="nuevoDocumento"
+                    placeholder="Nombre del documento"
+                >
+
+                <textarea
+                    id="contenidoNuevoDocumento"
+                    placeholder="Contenido del documento"
+                ></textarea>
+
+                <button
+                    class="btn"
+                    onclick="crearDocumento()"
+                >
+                    Crear documento
+                </button>
+
+                <div id="mensajeDocumento"></div>
+
+            </div>
+
+
+            <!-- Modificar -->
+
+            <div class="panel">
+
+                <h3>Modificar documento</h3>
+
+                <textarea
+                    id="contenidoModificarDocumento"
+                    placeholder="Nuevo contenido"
+                ></textarea>
+
+                <button
+                    class="btn"
+                    onclick="modificarDocumento()"
+                >
+                    Modificar documento
+                </button>
+
+                <div id="mensajeModificarDocumento"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="panel">
+
+            <h3>Fecha utilizada por el sistema</h3>
+
+            <p>
+                La fecha se captura como día, mes y año para
+                relacionarla con los registros creados o modificados.
+            </p>
+
+            <div id="fechaSistema"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- RUTINAS ---------- -->
+
+    <section class="section" id="rutinas">
+
+        <div class="section-title">
+
+            <h2>Rutinas</h2>
+
+            <p>
+                Generación de rutinas según el objetivo del cliente.
+            </p>
+
+        </div>
+
+
+        <div class="panel">
+
+            <h3>Generar rutina</h3>
+
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="rutinaId"
+                    placeholder="ID del cliente"
+                >
+
+                <select id="diaRutina">
+
+                    <option value="Día 1">
+                        Día 1
+                    </option>
+
+                    <option value="Día 2">
+                        Día 2
+                    </option>
+
+                    <option value="Día 3">
+                        Día 3
+                    </option>
+
+                </select>
+
+                <button
+                    class="btn"
+                    onclick="generarRutina()"
+                >
+                    Generar
+                </button>
+
+            </div>
+
+            <div id="resultadoRutina"></div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- ESTADÍSTICAS ---------- -->
+
+    <section class="section" id="estadisticas">
+
+        <div class="section-title">
+
+            <h2>Estadísticas</h2>
+
+            <p>
+                Información general de los registros.
+            </p>
+
+        </div>
+
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <span id="statTotal">0</span>
+
+                <p>
+                    Clientes
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span id="statPagados">0</span>
+
+                <p>
+                    Pagos realizados
+                </p>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span id="statPendientes">0</span>
+
+                <p>
+                    Pagos pendientes
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="stats-details">
+
+
+            <div class="panel">
+
+                <h3>Membresías</h3>
+
+                <p>
+                    Mensual:
+                    <strong id="statMensual">0</strong>
+                </p>
+
+                <p>
+                    Trimestral:
+                    <strong id="statTrimestral">0</strong>
+                </p>
+
+                <p>
+                    Anual:
+                    <strong id="statAnual">0</strong>
+                </p>
+
+            </div>
+
+
+            <div class="panel">
+
+                <h3>Objetivos</h3>
+
+                <p>
+                    Masa muscular:
+                    <strong id="statMasa">0</strong>
+                </p>
+
+                <p>
+                    Pérdida de grasa:
+                    <strong id="statGrasa">0</strong>
+                </p>
+
+                <p>
+                    Condición física:
+                    <strong id="statCondicion">0</strong>
+                </p>
+
+            </div>
+
+
+            <div class="panel">
+
+                <h3>Porcentajes</h3>
+
+                <p>
+                    Mensual:
+                    <strong id="porcentajeMensual">0%</strong>
+                </p>
+
+                <p>
+                    Trimestral:
+                    <strong id="porcentajeTrimestral">0%</strong>
+                </p>
+
+                <p>
+                    Anual:
+                    <strong id="porcentajeAnual">0%</strong>
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- ARQUITECTURA ---------- -->
+
+    <section class="section">
+
+        <div class="architecture-preview">
+
+            <h2>
+                Arquitectura del sistema
+            </h2>
+
+            <p>
+                Consulta la estructura, módulos, tecnologías y
+                funcionamiento de PowerFit.
+            </p>
+
+            <a
+                href="arquitectura.html"
+                class="btn"
+            >
+                Ver arquitectura
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- EQUIPO ---------- -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>Equipo de desarrollo</h2>
+
+            <p>
+                Integrantes del proyecto PowerFit.
+            </p>
+
+        </div>
+
+
+        <div class="team-grid">
+
+            <div class="team-card">
+                Emiliano V.P.
+            </div>
+
+            <div class="team-card">
+                Javier Tadeo M.B.
+            </div>
+
+            <div class="team-card">
+                Mauricio S.M.
+            </div>
+
+            <div class="team-card">
+                Gabriel Z.R.
+            </div>
+
+            <div class="team-card">
+                Leonardo A.L.
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ---------- FOOTER ---------- -->
+
+    <footer>
+
+        <img
+            src="imagenes/1logo.png"
+            alt="PowerFit"
+        >
+
+        <h3>
+            PowerFit
+        </h3>
+
+        <p>
+            Aplicación de administración para Iron Core Fitness Center.
+        </p>
+
+        <p>
+            Monterrey, Nuevo León, México.
+        </p>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
